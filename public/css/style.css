@@ -1,0 +1,16 @@
+table{
+    border-collapse: collapse;
+}
+.title, .table-title{
+    font-weight: bold;
+}
+.table-title{
+    font-size: 1.5em;
+}
+.alert-status{
+    margin: 2% 0;
+}
+.comment{
+    max-width: 100%;
+    min-width: 100%;
+}
