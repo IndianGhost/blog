@@ -16,7 +16,10 @@ class CommentController extends HomeController
         $post_id = Post::find(Input::get('post_id'));
         if($validator->fails())
         {
-            return redirect(route('post', $post_id))->withErrors($validator->messages());
+            return redirect(route('post', $post_id))
+                ->withErrors($validator->messages())
+                ->withInput($request->input())
+            ;
         }
         else
         {

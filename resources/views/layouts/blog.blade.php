@@ -5,20 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="{{ config('app.description', 'description') }}">
-    <meta name="author" content="{{ config('app.author', 'author') }}">
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/blog.css') }}" rel="stylesheet"/>
 
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/style.css?v=2') }}" rel="stylesheet"/>
     @yield('style')
 </head>
 
@@ -57,7 +57,7 @@
 @yield('content')
 
 <footer class="blog-footer">
-    <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p>© Copyright 2018 | <a href="{{ route('home') }}">{{ config('app.name', '') }}</a> by <a href="https://github.com/IndianGhost" target="_blank">IndianGhost</a>.</p>
     <p>
         <a href="#">Back to top</a>
     </p>

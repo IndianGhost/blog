@@ -15,7 +15,11 @@
                 @include('blog.includes.errors')
 
                 <div class="blog-post">
-                    <h2 class="blog-post-title">{{ $post->title }}</h2>
+                    <h2 class="blog-post-title">
+                        <a href="{{ route('home') }}">
+                            {{ $post->title }}
+                        </a>
+                    </h2>
                     <p class="blog-post-meta">
                         {{ $post->created_at->format('M d, Y') }} by <a href="{{ route('profile', $post->user_id) }}">{{ $post->user->name}}</a>
                         @if($post->created_at != $post->updated_at)
@@ -25,6 +29,11 @@
 
                     <p>{{ $post->content }}</p>
                     <hr>
+                    @if($post->user->id == Auth::user()->id)
+                        <a href="{{ route('postEdit', $post->id) }}" class="btn btn-primary">
+                            Edit
+                        </a>
+                    @endif
                 </div><!-- /.blog-post -->
                 <div class="row">
                     <div class="col-md-12">
@@ -44,6 +53,7 @@
                                        id="comment"
                                        name="content"
                                        placeholder="Your comment here..."
+                                      required
                                 >{{ old('content') }}</textarea>
                             </div>
                             <input

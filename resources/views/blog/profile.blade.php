@@ -34,6 +34,13 @@
                     <td>{{ $user['join_at']->diffForHumans() }}</td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <a href="{{ route('conversation', $user['posts'][0]->user_id) }}" class="btn btn-primary">Contact {{ $user['name'] }}</a>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
 
         <div class="page-header container">

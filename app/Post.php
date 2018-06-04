@@ -22,6 +22,12 @@ class Post extends Model
         'title', 'content', 'user_id'
     ];
 
+    public static $rules = [
+        'title'     =>  'required|max:255',
+        'content'   =>  'required|min:100',
+        'user_id'   =>  'required|numeric|min:1'
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\User');

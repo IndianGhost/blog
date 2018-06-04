@@ -12,9 +12,16 @@
 */
 
 Auth::routes();
-
+/*
+ * Les differentes vues du blog
+ */
 Route::get('/', 'HomeController@index')
     ->name('home')
+;
+
+Route::get('/{page}', 'HomeController@index')
+    ->where('page', '[0-9]*')
+    ->name('pagination')
 ;
 
 Route::get('/my-profile', 'HomeController@myProfile')
@@ -32,7 +39,41 @@ Route::get('/post/{id}', 'HomeController@post')
     ->where('id', '[0-9]+')
     ->name('post')
 ;
-
+/*
+ * Comment CRUD
+ */
 Route::post('/comment', 'CommentController@store')
     ->name('commentCreate')
 ;
+
+/*
+ * Post CRUD
+ */
+Route::group(['prefix'=>'/post'], function(){
+    Route::get('/add', 'PostController@add')
+        ->name('postAdd');
+    ;
+
+    Route::post('/store', 'PostController@store')
+        ->name('postStore')
+    ;
+
+    Route::get('/edit/{id}', 'PostController@edit')
+        ->where('id', '[0-9]+')
+        ->name('postEdit')
+    ;
+
+    Route::post('/update/{id}', 'PostController@update')
+        ->where('id', '[0-9]+')
+        ->name('postUpdate')
+    ;
+});
+/*
+ * Messenger
+ */
+//Route::group(['prefix'=>'/messages'], function(){
+//    Route::get('/{id}', '')
+//        ->where('id', '[0-9]+')
+//        ->name('conversation')
+//    ;
+//});

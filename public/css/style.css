@@ -10,7 +10,16 @@ table{
 .alert-status{
     margin: 2% 0;
 }
-.comment{
+.comment, .post-content{
     max-width: 100%;
     min-width: 100%;
+}
+.navbar--blue{
+    background-color: #428bca;
+}
+.navbar-item--customized{
+    color: #cdddeb !important;
+}
+.navbar-item--customized:hover{
+    color: #fff !important;
 }

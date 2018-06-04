@@ -13,6 +13,44 @@ class HomeController extends Controller
 {
     protected $currentRoute;
 
+    /*
+     * Cette methode sera reeutilisee dans autres vues
+     * Pagination : le role de cette methode est de calculer :
+     *  - Le nombre total des pages a paginer
+     *  - Le numero de la page courante
+     *  - Les indices des posts qui devraient etre affiches dans la page courante
+     *  - Les indices seront extraits du tableau contenant les posts et non pas les id de la base de donnees
+     */
+    protected function pagination($currentPage, $data, $postPerPage = 4)
+    {
+        $pagination = null;
+        //total number of records
+        $countData  =   count($data);
+
+        //total pages
+        $totalPages =   ceil( $countData / $postPerPage );
+
+        if($currentPage <= $totalPages && $currentPage>0)
+        {
+            $firstIndex =   $postPerPage * ($currentPage-1);
+            $lastIndex  =   $currentPage == $totalPages
+                            ?   $countData - 1
+                            :   $currentPage * $postPerPage -1;
+            $isNotFirst =   ($currentPage != 1);
+            $isNotLast  =   ($currentPage != $totalPages);
+
+            $pagination = [
+                'currentPage'   =>  $currentPage,
+                'totalPages'    =>  $totalPages,
+                'firstIndex'    =>  $firstIndex,
+                'lastIndex'     =>  $lastIndex,
+                'isNotFirst'    =>  $isNotFirst,
+                'isNotLast'    =>   $isNotLast
+            ];
+        }
+        return $pagination;
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -29,22 +67,22 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Router $router)
+    public function index($page=1)
     {
-        $currentRoute = $this->currentRoute;
-        $viewPath = 'home';
-        $posts = Post::orderByDesc('updated_at')->get();
+        $viewPath       =   'home';
+        $currentRoute   =   $this->currentRoute;
+        $posts          =   Post::orderByDesc('updated_at')->get();
+        $pagination     =   $this->pagination($page, $posts);
+
         if($posts->isNotEmpty())
         {
-            foreach($posts as $post)
-            {
-                $user = Post::find($post->id)->user;
-                if($user){
-                    $post['author'] = $user->name;
-                }
-            }
-            return view($viewPath, compact('posts', 'date', 'currentRoute'));
+            return $pagination ?
+                view($viewPath, compact('posts', 'currentRoute', 'pagination'))
+                :
+                redirect( route('home') )
+            ;
         }
+
         return view($viewPath, compact('currentRoute'));
     }
 
@@ -53,7 +91,7 @@ class HomeController extends Controller
         $viewPath       =   'blog.my-profile';
         $currentRoute   =   $this->currentRoute;
         $authenticated  =   Auth::user();
-        $posts          =   $authenticated->post;
+        $posts          =   $authenticated->post->sortByDesc('updated_at');
         return view($viewPath, compact(
                 'posts',
                 'authenticated',

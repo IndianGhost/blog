@@ -2,6 +2,9 @@
 
 @section('style')
     <style type="text/css">
+        .container{
+            margin-bottom: 2%;
+        }
     </style>
 @endsection
 
@@ -16,7 +19,11 @@
     </header>
 
     <div class="container">
-
+        @if( Session::get('alert') )
+            <div class="alert alert-success">
+                {{ Session::get('alert') }}
+            </div>
+        @endif
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -69,6 +76,12 @@
                     Unfortunately, you didn't write any post yet !
                 </p>
             @endforelse
-
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ route('postAdd') }}" class="btn btn-primary">
+                    Add a post
+                </a>
+            </div>
+        </div>
     </div>
 @endsection

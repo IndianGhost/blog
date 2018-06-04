@@ -33,6 +33,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static $rules = [
+        'name' => 'required|string|max:255|unique:users',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:6|confirmed',
+    ];
+
     public function post()
     {
         return $this->hasMany('App\Post');
