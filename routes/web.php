@@ -71,9 +71,11 @@ Route::group(['prefix'=>'/post'], function(){
 /*
  * Messenger
  */
-//Route::group(['prefix'=>'/messages'], function(){
-//    Route::get('/{id}', '')
-//        ->where('id', '[0-9]+')
-//        ->name('conversation')
-//    ;
-//});
+Route::group(['prefix'=>'/messages'], function(){
+    Route::get('/{id}', 'MessageController@conversation')
+        ->where('id', '[0-9]+')
+        ->name('conversation')
+    ;
+});
+
+Route::view('/messages', 'messenger.conversation-mockup');

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User as Receiver;
+use App\User as Sender;
 
 class Message extends Model
 {
@@ -27,4 +29,14 @@ class Message extends Model
         'sender_id'     =>  'required|numeric|min:1',
         'content'       =>  'required'
     ];
+
+    public function sender()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
