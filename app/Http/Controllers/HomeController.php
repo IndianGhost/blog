@@ -115,7 +115,7 @@ class HomeController extends Controller
             $user = [
                 'name' => $user->name,
                 'join_at' => $user->created_at,
-                'posts' => $user->post
+                'posts' => $user->post->sortByDesc('updated_at')
             ];
             return view($viewPath, compact('user', 'currentRoute'));
         }

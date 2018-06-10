@@ -28,12 +28,15 @@
                     </p>
 
                     <p>{{ $post->content }}</p>
-                    <hr>
                     @if($post->user->id == Auth::user()->id)
-                        <a href="{{ route('postEdit', $post->id) }}" class="btn btn-primary">
+                        <a href="{{ route('postEdit', $post->id) }}" class="btn btn-info">
                             Edit
                         </a>
+                        <a href="{{ route('postDelete', $post->id) }}" class="btn btn-danger js-delete-post">
+                            Delete
+                        </a>
                     @endif
+                    <hr>
                 </div><!-- /.blog-post -->
                 <div class="row">
                     <div class="col-md-12">
@@ -112,4 +115,18 @@
 
     </header>
 @endif
+@endsection
+
+@section('javascript')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.js-delete-post').click(function (e) {
+                e.preventDefault();
+                var confirmed = confirm('This post will be deleted definitively. Are you sure you want to continue?');
+                if(confirmed){
+                    window.location = this.getAttribute('href');
+                }
+            });
+        });
+    </script>
 @endsection

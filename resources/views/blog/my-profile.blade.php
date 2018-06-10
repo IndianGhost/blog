@@ -50,6 +50,16 @@
             </tbody>
         </table>
 
+        <div class="row">
+            <div class="col-md-12">
+                <center>
+                    <a href="{{ route('postAdd') }}" class="btn btn-info">
+                        Add a new post
+                    </a>
+                </center>
+            </div>
+        </div>
+
         <div class="page-header container">
             <h1 class="title">My posts</h1>
         </div>
@@ -69,6 +79,18 @@
                     </p>
 
                     <p>{{ $post->content }}</p>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="{{ route('postEdit', $post->id) }}" class="btn btn-info">
+                                Edit
+                            </a>
+                            <a href="{{ route('postDelete', $post->id) }}" class="btn btn-danger js-delete-post">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+
                     <hr>
                 </div><!-- /.blog-post -->
             @empty
@@ -76,12 +98,19 @@
                     Unfortunately, you didn't write any post yet !
                 </p>
             @endforelse
-        <div class="row">
-            <div class="col-md-12">
-                <a href="{{ route('postAdd') }}" class="btn btn-primary">
-                    Add a post
-                </a>
-            </div>
-        </div>
     </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.js-delete-post').click(function (e) {
+            e.preventDefault();
+            var confirmed = confirm('This post will be deleted definitively. Are you sure you want to continue?');
+            if(confirmed){
+                window.location = this.getAttribute('href');
+            }
+        });
+    });
+</script>
 @endsection

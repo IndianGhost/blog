@@ -36,11 +36,12 @@ class PostController extends HomeController
 
     public function edit($id)
     {
+        $currentRoute = $this->currentRoute;
         $viewPath   =   'blog.edit-post';
         $post       =   Post::find($id);
         if($post)
         {
-            return view($viewPath, compact('id', 'post'));
+            return view($viewPath, compact('id', 'post', 'currentRoute'));
         }
         return redirect(route('home'));
     }
@@ -63,5 +64,21 @@ class PostController extends HomeController
                 'alert'=>'Your post has been updated successfully !'
             ]);
         }
+    }
+
+    public function delete($id)
+    {
+        if($id){
+            $success    =   Post::find($id)->delete();
+            if($success){
+                return redirect( route('my-profile') )->with([
+                    'alert'=>'Your post has been deleted successfully !'
+                ]);
+            }
+            return redirect( route('my-profile') )->with([
+                'alert'=>'Oooops! There\'s something wrong, try to delete this post later.'
+            ]);
+        }
+        return redirect( route('my-profile') );
     }
 }

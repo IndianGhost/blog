@@ -23,17 +23,16 @@ Route::get('/{page}', 'HomeController@index')
     ->where('page', '[0-9]*')
     ->name('pagination')
 ;
+Route::group(['prefix'=>'/profile'], function(){
+    Route::get('/', 'HomeController@myProfile')
+        ->name('my-profile')
+    ;
 
-Route::get('/my-profile', 'HomeController@myProfile')
-    ->name('my-profile')
-;
-
-Route::get('/profile/{id}', 'HomeController@profile')
-    ->where('id', '[0-9]+')
-    ->name('profile')
-;
-
-Route::get('/profile', 'HomeController@profile');
+    Route::get('/{id}', 'HomeController@profile')
+        ->where('id', '[0-9]+')
+        ->name('profile')
+    ;
+});
 
 Route::get('/post/{id}', 'HomeController@post')
     ->where('id', '[0-9]+')
@@ -59,7 +58,8 @@ Route::group(['prefix'=>'/post'], function(){
     ;
 
     Route::get('/edit/{id}', 'PostController@edit')
-        ->where('id', '[0-9]+')
+        ->where('id', '[0-9]+'
+        )
         ->name('postEdit')
     ;
 
@@ -67,15 +67,26 @@ Route::group(['prefix'=>'/post'], function(){
         ->where('id', '[0-9]+')
         ->name('postUpdate')
     ;
+
+    Route::get('/delete/{id}', 'PostController@delete')
+        ->where('id', '[0-9]+')
+        ->name('postDelete')
+    ;
 });
 /*
  * Messenger
  */
 Route::group(['prefix'=>'/messages'], function(){
+    Route::post('/', 'MessageController@store')
+        ->name('messageStore')
+    ;
+
     Route::get('/{id}', 'MessageController@conversation')
         ->where('id', '[0-9]+')
         ->name('conversation')
     ;
-});
 
-Route::view('/messages', 'messenger.conversation-mockup');
+    Route::get('/', 'MessageController@messages')
+        ->name('messages')
+    ;
+});

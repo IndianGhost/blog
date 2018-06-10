@@ -5,6 +5,11 @@
         .container{
             margin-bottom: 2%;
         }
+        @media only screen and (max-width: 800px){
+            .container{
+                width: 90%;
+            }
+        }
     </style>
 @endsection
 
@@ -49,10 +54,16 @@
                 >{{ old('content') }}</textarea>
             </div>
             <div class="form-group">
-                <input type="submit"
-                       value="Add post"
-                       class="btn btn-primary"
-                />
+                <center>
+                    <input type="submit"
+                           value="Add post"
+                           class="btn btn-primary btn-add-post"
+                    />
+                    <input type="reset"
+                           value="Cancel"
+                           class="btn btn-primary btn-cancel-post"
+                    />
+                </center>
             </div>
         </form>
     </div>

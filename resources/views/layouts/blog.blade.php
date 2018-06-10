@@ -13,12 +13,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/blog.css') }}" rel="stylesheet"/>
 
-    <link href="{{ asset('css/style.css?v=2') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/style.css?v=4') }}" rel="stylesheet"/>
     @yield('style')
 </head>
 
@@ -28,9 +28,12 @@
     <div class="container">
         <nav class="blog-nav">
             <a class="blog-nav-item active" href="{{ route('home') }}">Home</a>
-            <a class="blog-nav-item" href="#">New features</a>
-            <a class="blog-nav-item" href="#">Press</a>
-            <a class="blog-nav-item" href="#">New hires</a>
+            <a class="blog-nav-item" href="#">News</a>
+            <a class="blog-nav-item" href="#">Sport</a>
+            <a class="blog-nav-item" href="#">Art</a>
+            <a class="blog-nav-item" href="#">Politics</a>
+            <a class="blog-nav-item" href="#">Science &amp; Technology</a>
+            <a class="blog-nav-item" href="#">Members</a>
             <a class="blog-nav-item" href="#">About</a>
             <a class="blog-nav-item pull-right" href="{{ route('logout') }}"
                onclick="event.preventDefault();
@@ -41,6 +44,7 @@
                 </form>
             </a>
             <a class="blog-nav-item pull-right" href="{{ route('my-profile') }}">{{ Auth::user()->name }}</a>
+            <a class="blog-nav-item pull-right" href="{{ route('messages') }}">Inbox</a>
         </nav>
     </div>
 </div>
@@ -71,7 +75,10 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript">
-    //code to set active page !
+    $(document).ready(function(){
+        {{--var currentRoute = '{{ $currentRoute }}';--}}
+//        alert(currentRoute);
+    });
 </script>
 @yield('javascript')
 </body>

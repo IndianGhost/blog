@@ -14,6 +14,10 @@ table{
     max-width: 100%;
     min-width: 100%;
 }
+.post-content{
+    max-height: 150px;
+    min-height: 150px;
+}
 .navbar--blue{
     background-color: #428bca;
 }
@@ -43,4 +47,81 @@ table{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #2196f3;
+}
+.title-conversation{
+    color: #000000bd;
+}
+.card, .card-sender, .card-receiver{
+    padding: 2%;
+    margin: 5% auto;
+    border-bottom: 1px solid #3f51b5;
+}
+.card:hover, .card-active:hover, .card-title-active:hover{
+    cursor: pointer;
+    opacity: 0.9;
+    background-color: #eceff133;
+}
+.card-active, .card-title-active{
+    background-color: #f5f5f5;
+}
+.card-title{
+    color: #428bca;
+    font-size: 1em;
+    font-weight: bold;
+}
+body{
+    overflow-x: hidden;
+}
+.conversation {
+    margin: 5% 0% 2% 0%;
+}
+.conversation-list, .conversation-messages{
+    background-color: #ffffffaa;
+    padding: 2% 1%;
+    border-radius: 10px;
+    box-shadow: 0 0 1px 0em #428bca;
+}
+.conversation-messages{
+    margin-left: 2%;
+}
+.card-sender, .card-receiver{
+    color: #1A237E;
+    border-radius: 5px;
+    margin: 5px 0 0 0;
+    padding: 2% 5%;
+    width: 55%;
+}
+.card-sender{
+    background-color: #428bca82;
+}
+.card-receiver{
+    background-color: #E0F2F1;
+}
+.message-area{
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100px;
+    min-height: 100px;
+    border-color: #b3b3b3;
+    padding: 1%;
+}
+.form-horizontal{
+    margin-top: 5%;
+}
+.conversation-messages-container{
+    display: block;
+    height: 350px;
+    overflow-y: scroll;
+    background-color: #fff;
+    padding: 2%;
+    box-shadow: inset 0px 0px 2px 1px #b3b3b3;
+}
+.sent-at {
+    color: #1a237ea6;
+    font-style: italic;
+}
+.say-hello{
+    display:  block;
+    margin: 30% auto;
+    text-align: center;
 }
