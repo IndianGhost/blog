@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name'      =>  $faker->name,
                 'email'     =>  $faker->email,
-                'password'  =>  $faker->password(6, 20)
+                'password'  =>  $faker->password(8, 20)
             ]);
         }
     }
