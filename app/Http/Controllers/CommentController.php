@@ -12,7 +12,7 @@ class CommentController extends HomeController
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), Comment::$rules);
-        $post_id = Post::find(Request::input('post_id'));
+        $post_id = Post::find($request->input('post_id'));
         if($validator->fails())
         {
             return redirect(route('post', $post_id))

@@ -9,7 +9,7 @@
     </div>
 
     <div class="row">
-    @if($pagination AND $posts->isNotEmpty())
+    @if(isset($pagination) AND $posts->isNotEmpty())
         <div class="col-sm-8 blog-main">
             @for($i = $pagination['firstIndex']; $i <= $pagination['lastIndex']; $i++)
             <div class="blog-post">
